@@ -3,6 +3,7 @@ import csv
 import pandas as pd
 
 months = [4,5,6,7]
+namespace_filter = "supported-vault"
 
 def main(month):
     my_json_file = f'hashicorp_vault_0{month}-2024_yearly_activity_report_prod-0{month + 1}-01-2024.json'
@@ -46,8 +47,8 @@ def main(month):
     # Load the CSV file
     data = pd.read_csv(output_csv_file)
 
-    # Filter the dataframe to keep only rows where 'namespace_path' contains 'managed-vault'
-    filtered_data = data[data['namespace_path'].str.contains('managed-vault', na=False)]
+    # Filter the dataframe to keep only rows where 'namespace_path' contains 'namespace_filter'
+    filtered_data = data[data['namespace_path'].str.contains('namespace_filter', na=False)]
 
     # Group by 'mount_path' and calculate the totals for each distinct value
     totals = filtered_data.groupby('mount_path')[['clients']].sum().reset_index()
