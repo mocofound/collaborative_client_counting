@@ -48,7 +48,7 @@ def main(month):
     data = pd.read_csv(output_csv_file)
 
     # Filter the dataframe to keep only rows where 'namespace_path' contains 'namespace_filter'
-    filtered_data = data[data['namespace_path'].str.contains('namespace_filter', na=False)]
+    filtered_data = data[data['namespace_path'].str.contains(f'{namespace_filter}', na=False)]
 
     # Group by 'mount_path' and calculate the totals for each distinct value
     totals = filtered_data.groupby('mount_path')[['clients']].sum().reset_index()
